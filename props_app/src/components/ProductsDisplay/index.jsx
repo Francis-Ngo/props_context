@@ -1,22 +1,27 @@
+import React from 'react';
 
-const ProductsDisplay = () => {
+const ProductsDisplay = ({ products, setProducts }) => {
+  const handleProductClick = (id) => {
+ 
+    const updatedProducts = products.map((product) => {
+      if (product.id === id) {
+        return { ...product, inCart: true };
+      }
+      return product;
+    });
 
-    const handleProductClick = (id) => {
-        // we have the id of the clicked property
-        
-        // 1. make a new products array (from the old state)
-        // 2. set inCart = true for the clicked product
-        // 3. set state to this new products array
-    }
+    setProducts(updatedProducts);
+  };
 
   return (
     <div>
-        {/* we need the products array here */}
-        {products.map((product) => {
-            return <div onClick={() => handleProductClick(product.id)}>product.name</div>
-        })}
+      {products.map((product) => (
+        <div key={product.id} onClick={() => handleProductClick(product.id)}>
+          {product.name}
+        </div>
+      ))}
     </div>
-  )
-}
+  );
+};
 
-export default ProductsDisplay
+export default ProductsDisplay;
